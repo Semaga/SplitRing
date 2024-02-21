@@ -47,8 +47,8 @@ Point(10) = {-2*R, 0, -0.5*L, 4*lc};
 // Point(10) = {(R + w) *Sqrt(1 - (0.5*t/(R+w))^2) , 0.5*t, 0, lc}; 
 // Point(11) = {(R + w) *Sqrt(1 - (0.5*t/(R+w))^2) , -0.5*t, 0, lc}; 
 // Point(12) = {-(R + w)  , 0, 0, lc}; 
-Point(11) = {5 * R, 0, -0.5*L, 10*lc};
-Point(12) = {-5 * R, 0, -0.5*L, 10*lc};
+Point(11) = {2 * R + 0.5*cm, 0, -0.5*L, 10*lc};
+Point(12) = {-2 * R - 0.5*cm, 0, -0.5*L, 10*lc};
 
 Point(13) = {(r + w)*Sqrt(1 - (0.5*t/(r + w))^2),
             0.5*t + 0.5*cm, -0.5*L, lc};
@@ -60,6 +60,11 @@ Point(15) = {(r + w)*Sqrt(1 - (0.5*t/(r + w))^2) + 0.5 * cm,
 Point(16) = {(r + w)*Sqrt(1 - (0.5*t/(r + w))^2) + 0.5 * cm, 
             -0.5*t - 0.5* cm, -0.5*L, lc};
 
+
+Point(17) = {0, 2 * R , -0.5*L, 10*lc};
+Point(18) = {0, -2 * R , -0.5*L, 10*lc};
+Point(19) = {0, 2 * R+ 0.5*cm, -0.5*L, 10*lc};
+Point(20) = {0, -2 * R - 0.5*cm, -0.5*L, 10*lc};
 // Point(2) = {r, 0, 0, lc}; Point(3) = {r + w, 0, 0, lc};
 
 // set point to the 0,0,0 
@@ -85,10 +90,16 @@ Line(11)   = {16, 14};
 Line(12)   = {14,  5};
 
 
-// Circle(13) = {9,0, 10};
-// Circle(14) = {10,0, 9};
-// Circle(15) = {11,0, 12};
-// Circle(16) = {12,0, 11};
+Circle(13) = {9,0, 17};
+Circle(14) = {17,0, 10};
+Circle(15) = {10,0, 18};
+Circle(16) = {18,0, 9};
+
+Circle(17) = {11,0, 19};
+Circle(18) = {19,0, 12};
+Circle(19) = {12,0, 20};
+Circle(20) = {20,0, 11};
+
 
 
 // surace of split ring
@@ -110,14 +121,17 @@ Color Yellow{ Surface{ 3 }; }
 Extrude {0, 0, L} { Surface{3}; }
 // // surface out the ring 1 part
 
-// Curve Loop(4) = {13,14};
-// Plane Surface(4) = {4, 1, 2};
-// Color Yellow{ Surface{ 4 }; }
-// Extrude {0, 0, L} { Surface{4}; }
+//remove  mesh  from ring resonator
+Curve Loop(4) = {13,14, 15, 16};
+Plane Surface(4) = {4};
+Color Yellow{ Surface{ 4 }; }
+Extrude {0, 0, L} { Surface{4}; }
 // // surface out the ring 2 part
 
-// Curve Loop(5) = {15,16};
-// Plane Surface(5) = {5, 4, 1, 2};
+Curve Loop(5) = {17,18, 19 ,20};
+Plane Surface(5) = {5};
+Color Black{ Surface{ 4 }; }
+Extrude {0, 0, L} { Surface{5}; }
 // Color Yellow{ Surface{ 5 }; }
 
 

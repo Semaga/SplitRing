@@ -123,15 +123,15 @@ Extrude {0, 0, L} { Surface{3}; }
 
 //remove  mesh  from ring resonator
 Curve Loop(4) = {13,14, 15, 16};
-Plane Surface(4) = {4};
+Plane Surface(4) = {4,3,2,1};
 Color Yellow{ Surface{ 4 }; }
 Extrude {0, 0, L} { Surface{4}; }
 // // surface out the ring 2 part
 
 Curve Loop(5) = {17,18, 19 ,20};
-Plane Surface(5) = {5};
+Plane Surface(5) = {5,4};
 Color Black{ Surface{ 4 }; }
 Extrude {0, 0, L} { Surface{5}; }
-// Color Yellow{ Surface{ 5 }; }
+Color Black{ Surface{ 5 }; }
 
 
